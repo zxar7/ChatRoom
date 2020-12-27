@@ -41,7 +41,7 @@ app.post('/api/selectUser', (req, res) => {
         currentUser = user;
         res.json(currentUser)
     }
-    res.json({ userId: false });
+    else res.json({ userId: false });
 })
 
 app.post('/api/saveMessage', (req, res) => {
