@@ -1,0 +1,97 @@
+.App {
+  text-align: center;
+  max-height: 100vh;
+  min-height: 100vh;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow: auto;
+  background-color: #1d2431;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  font-weight: bold;
+  color: #e54444;
+  top: 0;
+}
+
+.selectHeader, .userChat {
+  font-size: 2.5rem;
+  color: darksalmon;
+}
+
+.ui.card.indCard {
+  margin: 2rem;
+  max-width: 25%;
+  width: inherit;
+  display: inline-block;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.avatars {
+  display: flex;
+  width: 100%;
+  flex-flow: wrap;
+  justify-content: center;
+}
+
+.avatarImg {
+  width: 100px;
+}
+
+.ui.card.indCard .image img {
+  max-width: 35%;
+  height: auto;
+}
+
+.messageArea {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  width: 70%;
+}
+
+.messageArea button {
+  width: 70px;
+  align-self: center;
+  margin: 1rem;
+  font-weight: bold;
+  padding: 0.2rem;
+}
+
+.messageArea textarea {
+  background-color: #050505;
+  color: wheat;
+}
+
+.ui.card.userMessage {
+  width: 70%;
+  margin: 1.5rem auto;
+  padding: 0.5rem;
+}
+
+div.emptyMessage {
+  color: wheat;
+  margin: 1rem;
+}
+
+.ui.button {
+  cursor: pointer;
+}
+
+.ui.card.userMessage .header {
+  text-align: right;
+}
+
+.ui.card.userMessage .description {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
