@@ -2,5 +2,5 @@
 
 Steps to get it running.
 
-1. Run 'nodemon server' inside the server folder.
-2. Run 'npm start' in the outer folder
+1. Hit 'npm run dev'.
+2. Log in through different machines to see messages from 1 user show up in real time.
