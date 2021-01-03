@@ -18,13 +18,14 @@ const getCurrentTimeSec = () => {
     return parseInt(new Date() / 1000);
 }
 
+app.listen(port, () => {
+    console.log(`Server listening on the port::${port}`);
+});
+
 app.get('/', (req, res) => {
     res.send(`<h1>API Running on the port ${port}</h1>`);
 });
 
-app.listen(port, () => {
-    console.log(`Server listening on the port::${port}`);
-});
 
 app.get('/api/user/', (req, res) => {
     const currentTime = getCurrentTimeSec();
@@ -37,11 +38,13 @@ app.get('/api/user/', (req, res) => {
 
 app.post('/api/selectUser', (req, res) => {
     const user = req.body.userData;
+    let responseObj = {};
     if (!currentUser) {
         currentUser = user;
-        res.json(currentUser)
+        responseObj = currentUser;
     }
-    else res.json({ userId: false });
+    else responseObj = { userId: false };
+    res.json(responseObj);
 })
 
 app.post('/api/saveMessage', (req, res) => {
@@ -56,5 +59,5 @@ app.post('/api/saveMessage', (req, res) => {
 
 app.get('/api/confirmUserPresence', (req, res) => {
     userStillPresent = getCurrentTimeSec();
-    res.send()
+    res.send(true)
 })

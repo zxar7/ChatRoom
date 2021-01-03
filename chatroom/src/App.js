@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
-import UserChat from './UserChat';
-import SelectAvatar from './SelectAvatar';
+import UserChat from './components/UserChat';
+import SelectAvatar from './components/SelectAvatar';
 
+import './App.css';
+import { checkActiveUser, confirmUserPresence, selectActiveUser } from './services';
 
 class App extends Component {
 
@@ -19,31 +20,25 @@ class App extends Component {
 
   componentDidMount = () => {
     this.userPresentInterval = setInterval(async () => {
-      const activeUser = await fetch(`/api/user/`).then(res => res.json());
+      const activeUser = await checkActiveUser();
       this.setState({ activeUser, firstCheck: true })
     }, 1000);
+  }
+
+  setupUser = async (selectedUser) => {
+    const activeUser = await selectActiveUser({ userData: selectedUser });
+    if (activeUser?.userId)
+      this.setState({ activeUser, currentUser: true }, () => {
+        clearInterval(this.activeUserInterval);
+        this.activeUserInterval = setInterval(async () => {
+          await confirmUserPresence();
+        }, 1000);
+      })
   }
 
   componentWillUnmount = () => {
     clearInterval(this.userPresentInterval);
     clearInterval(this.activeUserInterval)
-  }
-
-  setupUser = async (selectedUser) => {
-    const activeUser = await fetch('/api/selectUser', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json;charset=utf-8"
-      },
-      body: JSON.stringify({ userData: selectedUser })
-    }).then(res => res.json());
-    if (activeUser?.userId)
-      this.setState({ activeUser, currentUser: true }, () => {
-        clearInterval(this.activeUserInterval);
-        this.activeUserInterval = setInterval(async () => {
-          await fetch(`/api/confirmUserPresence`).then(res => res.text());
-        }, 1000);
-      })
   }
 
   render() {

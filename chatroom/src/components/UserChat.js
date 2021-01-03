@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Form, TextArea, Button, Header } from 'semantic-ui-react';
-
-// import ShowPassiveUser from "./ShowPassiveUser";
+import { saveUserMessage } from '../services';
 
 export const ShowPassiveUser = (props) => {
     const { activeUser } = props;
@@ -14,7 +13,7 @@ export const ShowPassiveUser = (props) => {
                     const time = new Date(msg.timestamp || '');
                     const timestamp = time.toDateString() + ' ' + time.toLocaleTimeString();
                     return <Card
-                        style={{ backgroundColor: bgColor, color }}
+                        style={{ "background": `radial-gradient(${bgColor} 59%, rgb(0 0 0 / 0%) 78%)`, color }}
                         className='userMessage'
                         description={msg.message || ''}
                         header={timestamp}
@@ -42,13 +41,7 @@ export class ShowActiveUser extends Component {
 
 
     saveMessage = async () => {
-        await fetch('/api/saveMessage', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json;charset=utf-8"
-            },
-            body: JSON.stringify({ message: this.state.message })
-        }).then(res => res.json());
+        await saveUserMessage({ message: this.state.message });
         this.setState({
             message: ''
         })
@@ -92,7 +85,7 @@ export default class UserChat extends Component {
                 <Card
                     className="indCard"
                     image={activeUser.src}
-                    style={{ backgroundColor: activeUser.bgColor, color: activeUser.color }}
+                    style={{ "background": `radial-gradient(${activeUser.bgColor} 59%, rgb(0 0 0 / 0%) 78%)`, color: activeUser.color }}
                     header={activeUser.name} />
                 {currentUser ?
                     <ShowActiveUser activeUser={activeUser} />

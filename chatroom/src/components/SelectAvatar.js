@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from 'semantic-ui-react';
 
-import {avatars} from '../data/users'
+import { avatars } from '../data/users'
 
 export default class SelectAvatar extends Component {
 
@@ -21,9 +21,9 @@ export default class SelectAvatar extends Component {
                             onClick={this.onSelect}
                             className="indCard"
                             image={avt.src}
-                            style={{backgroundColor: avt.bgColor, color: avt.color}}
+                            style={{ "background": `radial-gradient(${avt.bgColor} 59%, rgb(0 0 0 / 0%) 78%)`, color: avt.color }}
                             header={avt.name} />
-                        )
+                    )
                     }
                 </div>
             </div>
